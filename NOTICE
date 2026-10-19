@@ -1,0 +1,12 @@
+ClearBlock
+Copyright (C) 2026 ClearBlock contributors
+
+This project includes generated Declarative Net Request filter rules from
+@adguard/dnr-rulesets, Copyright Adguard Software Ltd., licensed under
+GPL-3.0-only. The source package and filter metadata are available at:
+https://www.npmjs.com/package/@adguard/dnr-rulesets
+
+The archived predecessor snapshot in legacy-adblock-6.49.0 is derived from
+AdBlock by Adblock, Inc. and remains subject to GNU GPL version 3 and the
+third-party notices included in that directory. It is preserved for audit and
+migration history and is not included in release packages.

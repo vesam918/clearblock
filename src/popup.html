@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClearBlock</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="popup.js"></script>
+</head>
+<body class="popup">
+  <header class="topbar">
+    <div class="brand"><img src="icons/icon-32.png" alt=""><strong>ClearBlock</strong></div>
+    <button id="settings" class="icon-button" type="button" aria-label="Open settings">⚙</button>
+  </header>
+  <main>
+    <section class="hero">
+      <label class="switch-row" for="enabled">
+        <span><strong id="mode">Protection active</strong><small id="mode-detail">Ads, trackers and annoyances are being filtered.</small></span>
+        <span class="switch"><input id="enabled" type="checkbox"><span aria-hidden="true"></span></span>
+      </label>
+      <div class="stat"><span id="total">0</span><small>requests blocked</small></div>
+    </section>
+    <section class="site-card">
+      <small>CURRENT SITE</small>
+      <strong id="domain">Loading…</strong>
+      <button id="site-toggle" class="secondary" type="button">Allow this site</button>
+    </section>
+    <p class="privacy">No accounts · no telemetry · settings stay on your device</p>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </main>
+</body>
+</html>

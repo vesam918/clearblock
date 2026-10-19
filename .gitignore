@@ -1,0 +1,9 @@
+node_modules/
+dist/
+release/
+legacy-adblock-6.49.0/
+.DS_Store
+*.pem
+*.crx
+.env
+.env.*
