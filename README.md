@@ -9,7 +9,7 @@ ClearBlock is a clean Manifest V3 rebuild of an archived AdBlock 6.49.0 package.
 - **205,000+ packaged network rules** for advertising, tracking, and common annoyances
 - Master pause/resume control
 - Independent ad, tracker, and annoyance rulesets
-- Optional YouTube compatibility profile that relaxes filtering for YouTube-owned page resources
+- YouTube network filtering plus cleanup of clearly identified rendered ad containers
 - Per-site allowlist from the popup
 - Custom domain blocklist
 - Local blocked-request statistics and per-tab badge
@@ -76,14 +76,17 @@ ClearBlock uses:
 
 Read the full [privacy policy](PRIVACY.md).
 
-## YouTube compatibility and reference review
+## YouTube behavior and reference review
 
-The optional compatibility profile is deliberately narrow: it lets YouTube-owned page and subresource requests bypass ClearBlock so users can recover stable playback without disabling protection globally. It does **not** remove YouTube enforcement messages, spoof page globals, force playback, reload around detection, download videos, or unlock paid Premium features.
+ClearBlock keeps its packaged network rules active on YouTube and removes clearly identified rendered ad containers. The earlier compatibility option was removed because it overrode those rules and could allow ads through. YouTube serves some video ads from the same infrastructure as requested media, so a Manifest V3 extension cannot honestly guarantee that every in-stream ad will always be blocked without risking playback.
 
-Two requested repositories were reviewed before this profile was added:
+ClearBlock is not a YouTube client modification. It does **not** spoof page globals, force playback, reload around detection, download videos, bypass access controls, or unlock paid Premium features.
 
-- [`TheRealJoelmatic/RemoveAdblockThing`](https://github.com/TheRealJoelmatic/RemoveAdblockThing) is MIT-licensed, but its core behavior deliberately bypasses YouTube's ad-block enforcement through page-global manipulation, forced refreshes, DOM removal, and a remote update check. None of that code is included.
+Three requested repositories were reviewed:
+
+- [`TheRealJoelmatic/RemoveAdblockThing`](https://github.com/TheRealJoelmatic/RemoveAdblockThing) is MIT-licensed, but its core behavior bypasses YouTube's ad-block enforcement through page-global manipulation, forced refreshes, DOM removal, and a remote update check. None of that code is included.
 - [`Gryphonulbeam/YouTube-Premium-Mod-2026`](https://github.com/Gryphonulbeam/YouTube-Premium-Mod-2026) does not contain an extension or desktop client implementation. It is an unlicensed download landing page whose configuration points to an obfuscated third-party domain. No code, assets, downloads, or claims from it are included.
+- [`Tonwalter888/YouMod`](https://github.com/Tonwalter888/YouMod) is GPL-3.0, but it is an Objective-C/Logos tweak injected into the native iOS YouTube app, not a Chromium extension. Its ad-removal and downloader code relies on private app classes, decrypted IPA modification, signed playback requests, and native media processing that are unavailable to Chrome extensions. It is reference-only; no source was copied.
 
 ## Contributing and security
 

@@ -6,7 +6,7 @@ import {
   buildAllowRule,
   buildCustomBlockRule,
   buildPauseRule,
-  buildSiteCompatibilityRules,
+  getYoutubeAdAction,
   normalizeDomain,
   nextRuleId,
   sanitizeSettings,
@@ -58,34 +58,18 @@ test("buildPauseRule bypasses filtering globally", () => {
   });
 });
 
-test("buildSiteCompatibilityRules relaxes filtering only for the configured site family", () => {
-  assert.deepEqual(buildSiteCompatibilityRules("youtube", 3_100_001), [
-    {
-      id: 3_100_001,
-      priority: 9_000,
-      action: { type: "allowAllRequests" },
-      condition: {
-        requestDomains: ["youtube.com", "youtube-nocookie.com", "youtu.be"],
-        resourceTypes: ["main_frame"],
-      },
-    },
-    {
-      id: 3_100_002,
-      priority: 9_000,
-      action: { type: "allow" },
-      condition: {
-        initiatorDomains: ["youtube.com", "youtube-nocookie.com", "youtu.be"],
-        resourceTypes: [
-          "main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object",
-          "xmlhttprequest", "ping", "media", "websocket", "other",
-        ],
-      },
-    },
-  ]);
+test("YouTube ads remain filtered even when legacy compatibility was enabled", () => {
+  assert.equal(getYoutubeAdAction({
+    enabled: true,
+    blockAds: true,
+    youtubeCompatibility: true,
+  }), "block");
 });
 
-test("buildSiteCompatibilityRules rejects unknown profiles", () => {
-  assert.throws(() => buildSiteCompatibilityRules("unknown", 3_100_001), /Unknown compatibility profile/);
+test("YouTube ad filtering follows master and advertising controls", () => {
+  assert.equal(getYoutubeAdAction({ enabled: false, blockAds: true }), "allow");
+  assert.equal(getYoutubeAdAction({ enabled: true, blockAds: false }), "allow");
+  assert.equal(getYoutubeAdAction({ enabled: true, blockAds: true }), "block");
 });
 
 test("nextRuleId returns the first available id in the selected range", () => {

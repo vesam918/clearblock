@@ -21,3 +21,11 @@ test("all packaged rulesets start enabled", () => {
   assert.ok(manifest.declarative_net_request.rule_resources.length >= 3);
   assert.ok(manifest.declarative_net_request.rule_resources.every((ruleset) => ruleset.enabled));
 });
+
+test("YouTube cleanup runs only on YouTube pages", () => {
+  assert.deepEqual(manifest.content_scripts, [{
+    matches: ["https://www.youtube.com/*", "https://m.youtube.com/*"],
+    js: ["youtube.js"],
+    run_at: "document_start",
+  }]);
+});

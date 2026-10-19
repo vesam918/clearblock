@@ -2,7 +2,6 @@ import {
   buildAllowRule,
   buildCustomBlockRule,
   buildPauseRule,
-  buildSiteCompatibilityRules,
   nextRuleId,
   normalizeDomain,
   sanitizeSettings,
@@ -49,14 +48,9 @@ async function applySettings(settings) {
   const installedManagedRuleIds = dynamicRules
     .filter(({ id }) => managedRuleIds.includes(id))
     .map(({ id }) => id);
-  const addRules = [];
-  if (!normalized.enabled) addRules.push(buildPauseRule(PAUSE_RULE_ID));
-  if (normalized.youtubeCompatibility) {
-    addRules.push(...buildSiteCompatibilityRules("youtube", YOUTUBE_COMPATIBILITY_RULE_IDS[0]));
-  }
   await chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds: installedManagedRuleIds,
-    addRules,
+    addRules: normalized.enabled ? [] : [buildPauseRule(PAUSE_RULE_ID)],
   });
   await chrome.storage.local.set({ [SETTINGS_KEY]: normalized });
   return normalized;

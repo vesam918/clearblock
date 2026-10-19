@@ -22,7 +22,9 @@ export default [
         Map: "readonly",
         WebSocket: "readonly",
         fetch: "readonly",
-        process: "readonly"
+        process: "readonly",
+        MutationObserver: "readonly",
+        Node: "readonly"
       },
     },
     rules: {

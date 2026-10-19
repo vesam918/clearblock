@@ -10,7 +10,7 @@
 <body class="options">
   <header class="options-header">
     <div class="brand"><img src="icons/icon-48.png" alt=""><span><strong>ClearBlock</strong><small>Privacy controls that stay understandable</small></span></div>
-    <a href="https://github.com/vesam918/ClearBlock" target="_blank" rel="noreferrer">View source</a>
+    <a href="https://github.com/vesam918/clearblock" target="_blank" rel="noreferrer">View source</a>
   </header>
   <main class="settings-grid">
     <aside>
@@ -28,7 +28,6 @@
           <label><span><strong>Advertising</strong><small>Block common advertising networks.</small></span><input type="checkbox" name="blockAds"></label>
           <label><span><strong>Tracking</strong><small>Stop common analytics and tracking endpoints.</small></span><input type="checkbox" name="blockTrackers"></label>
           <label><span><strong>Annoyances</strong><small>Reduce push prompts and social widgets.</small></span><input type="checkbox" name="blockAnnoyances"></label>
-          <label><span><strong>YouTube compatibility</strong><small>Allow YouTube’s own resources to reduce playback breakage. This does not bypass warnings or unlock Premium features.</small></span><input type="checkbox" name="youtubeCompatibility"></label>
           <label><span><strong>Toolbar badge</strong><small>Show the local blocked-request total.</small></span><input type="checkbox" name="showBadge"></label>
         </form>
       </section>
@@ -44,7 +43,7 @@
           <ul id="blocklist" class="domain-list"></ul>
         </div>
       </section>
-      <section class="panel about"><h2>Private by design</h2><p>ClearBlock does not collect browsing history, transmit analytics, use remote code, or require an account. Filtering runs through Chrome's Manifest V3 Declarative Net Request API.</p><p>The YouTube profile is intentionally compatibility-first: it can relax ClearBlock on YouTube, but it does not impersonate Premium, remove enforcement messages, download videos, or manipulate YouTube’s player internals.</p><p>ClearBlock is open source under GPL-3.0.</p></section>
+      <section class="panel about"><h2>Private by design</h2><p>ClearBlock does not collect browsing history, transmit analytics, use remote code, or require an account. Filtering runs through Chrome's Manifest V3 Declarative Net Request API.</p><p>On YouTube, ClearBlock combines network filtering with removal of clearly identified rendered ad containers. It does not impersonate Premium, download videos, bypass access controls, or modify YouTube’s private player data.</p><p>ClearBlock is open source under GPL-3.0.</p></section>
     </div>
   </main>
   <p id="status" class="status floating" role="status" aria-live="polite"></p>

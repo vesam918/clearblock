@@ -87,30 +87,7 @@ export function buildPauseRule(id) {
   };
 }
 
-const COMPATIBILITY_PROFILES = Object.freeze({
-  youtube: ["youtube.com", "youtube-nocookie.com", "youtu.be"],
-});
-
-const SUBRESOURCE_TYPES = [
-  "main_frame", "sub_frame", "stylesheet", "script", "image", "font", "object",
-  "xmlhttprequest", "ping", "media", "websocket", "other",
-];
-
-export function buildSiteCompatibilityRules(profile, firstRuleId) {
-  const domains = COMPATIBILITY_PROFILES[profile];
-  if (!domains) throw new Error(`Unknown compatibility profile: ${profile}`);
-  return [
-    {
-      id: firstRuleId,
-      priority: 9_000,
-      action: { type: "allowAllRequests" },
-      condition: { requestDomains: [...domains], resourceTypes: ["main_frame"] },
-    },
-    {
-      id: firstRuleId + 1,
-      priority: 9_000,
-      action: { type: "allow" },
-      condition: { initiatorDomains: [...domains], resourceTypes: [...SUBRESOURCE_TYPES] },
-    },
-  ];
+export function getYoutubeAdAction(settings) {
+  const normalized = sanitizeSettings(settings);
+  return normalized.enabled && normalized.blockAds ? "block" : "allow";
 }

@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ClearBlock",
   "short_name": "ClearBlock",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A transparent, privacy-first ad and tracker blocker with local controls and no telemetry.",
   "minimum_chrome_version": "120",
   "icons": {
@@ -31,6 +31,13 @@
     "tabs"
   ],
   "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://m.youtube.com/*"],
+      "js": ["youtube.js"],
+      "run_at": "document_start"
+    }
+  ],
   "declarative_net_request": {
     "rule_resources": [
       {
